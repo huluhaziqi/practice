@@ -1,0 +1,31 @@
+package util;
+
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+import org.springframework.util.StringUtils;
+
+import java.util.Properties;
+
+public class VelocityUtil {
+
+    public static void generator(String inputVmFilePath, String outputFilePath, VelocityContext context) {
+        Properties properties = new Properties();
+        properties.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH)
+    }
+
+    public static String getPath(String filePath) {
+        String path = "";
+        if (!StringUtils.isEmpty(filePath)) {
+            path = filePath.substring(0, filePath.lastIndexOf("/") + 1);
+        }
+        return path;
+    }
+
+    public static String getFile(String filePath) {
+        String file = "";
+        if (!StringUtils.isEmpty(filePath)) {
+            file = filePath.substring(filePath.lastIndexOf("/") + 1);
+        }
+        return file;
+    }
+}

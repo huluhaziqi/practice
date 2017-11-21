@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="generator.properties"></properties>
+    <context id="MysqlContext" targetRuntime="Mybatis3" defaultModelType="flat">
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!--beginningDelimiter默认值endingDelmiter默认值修改-->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelmiter" value="`"/>
+        <!--toString-->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!--序列化-->
+        <plugin type="com.lin.plugin.SerializablePlugin">
+            <property name="supressJavaInterface" value="false"/>
+        </plugin>
+        <!--缓存-->
+        <plugin type="org.mybatis.generator.plugins.CachePlugin">
+            <property name="cache_type" value="org.mybatis.caches.ehcache.LoggingEhcache"/>
+        </plugin>
+        <!--生成equals和hashCode-->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <!--z注释的使用-->
+        <commentGenerator type="com.lin.plugin.CommentGenerator">
+            <property name="supressAllComments" value="true"/>
+            <property name="supressDate" value="true"/>
+        </commentGenerator>
+        <!--数据连接池-->
+        <jdbcConnection driverClass="${generator.jdbc.driver}" connectionURL="${generator.jdbc.url}"
+                        password="${generator.jdbc.password}" userId="${generator.jdbc.username}"/>
+        <!--model-->
+        <javaModelGenerator targetPackage="${generator_javaModelGenerator_targetPackage}"
+                            targetProject="${targetProject}/src/main/java"></javaModelGenerator>
+        <!--xml-->
+        <sqlMapGenerator targetPackage="${generator_sqlMapGenerator_targetPackage}"
+                         targetProject="${targetProject}/src/main/java"></sqlMapGenerator>
+        <!--mapper接口-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${generator_javaClientGenerator_targetPackage}"
+                             targetProject="${targetProject}/src/main/java"></javaClientGenerator>
+        #foreach($table in $tables)
+            #if($last_insert_id_tables.containsKey($!table.table_name))
+                <table tableName="$!table.table_name" domainObjectName="$!table.model_name">
+                    <generatedKey column="$!last_insert_id_tables.get($table.table_name)" sqlStatment="MySql"
+                                  identity="true"></generatedKey>
+                </table>
+            #else
+            <table tableName="$!table.table_name" domainObjectName="$!table.model_name">
+            #end
+        #end
+    </context>
+</generatorConfiguration>

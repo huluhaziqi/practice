@@ -18,7 +18,7 @@ public class JdbcUtil {
     public JdbcUtil(String driver, String url, String password, String username) {
         try {
             Class.forName(driver);
-            connection = DriverManager.getConnection(url, username, AESUtil.AESEncode2(password, "AES"));
+            connection = DriverManager.getConnection(url, username, (password));
             System.out.println("数据库连接");
         } catch (Exception e) {
             e.printStackTrace();

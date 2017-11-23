@@ -197,16 +197,17 @@ public class AESUtil {
 
     public static void main(String[] args) {
         String[] keys = {
-                "", "root"
+                "root"
         };
         System.out.println("key | AESEncode | AESDecode");
         for (String key : keys) {
             System.out.print(key + " | ");
-            String encryptString = AESEncode2(key,"AES");
+            String encryptString = AESEncode(key);
             System.out.print(encryptString + " | ");
-            String decryptString = AESDecode2(encryptString,"AES");
+            String decryptString = AESDecode(encryptString);
             System.out.println(decryptString);
         }
+        //LxxDXmrgzfd4sKpQFctPLA==
     }
 
 }

@@ -1,7 +1,7 @@
-package plugin;
+package com.lin.common.plugin;
 
-import com.lin.common.util.AESUtil;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import com.lin.common.util.AESUtil;
 
 public class EncryptPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
 

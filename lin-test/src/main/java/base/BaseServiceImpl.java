@@ -1,6 +1,6 @@
 package base;
 
-import util.SpringContextUtil;
+import com.lin.common.util.SpringContextUtil;
 
 import java.lang.reflect.ParameterizedType;
 

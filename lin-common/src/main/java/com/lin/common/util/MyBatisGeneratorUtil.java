@@ -1,8 +1,16 @@
-package util;
+package com.lin.common.util;
 
 import org.apache.velocity.VelocityContext;
+import org.mybatis.generator.api.MyBatisGenerator;
+import org.mybatis.generator.config.Configuration;
+import org.mybatis.generator.config.xml.ConfigurationParser;
+import org.mybatis.generator.exception.InvalidConfigurationException;
+import org.mybatis.generator.exception.XMLParserException;
+import org.mybatis.generator.internal.DefaultShellCallback;
 
+import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +32,7 @@ public class MyBatisGeneratorUtil {
             String username,
             String table_prefix,
             String package_name,
-            Map<String,String> last_insert_id_tables) {
+            Map<String, String> last_insert_id_tables) {
         generatorConfig_vm = MyBatisGeneratorUtil.class.getResource(generatorConfig_vm).getPath();
         System.out.println("generatorConfig_vm : " + generatorConfig_vm);
         String targetProject = "lin-test";
@@ -51,23 +59,49 @@ public class MyBatisGeneratorUtil {
         //释放连接
         jdbcUtil.release();
 
-        context.put("tables",tables);
+        context.put("tables", tables);
         context.put("generator_javaModelGenerator_targetPackage", package_name + ".model");
-        context.put("generator_sqlMapGenerator_targetPackage",package_name + ".dao.mapper");
+        context.put("generator_sqlMapGenerator_targetPackage", package_name + ".dao.mapper");
         context.put("generator_javaClientGenerator_targetPackage", package_name + ".dao.mapper");
-        context.put("targetProject",targetProject);
-        context.put("targetProject_sqlMap",package_name + ".dao.mapper");
-        context.put("generator_jdbc_password",AESUtil.AESDecode(password));
-        context.put("last_insert_id_tables",last_insert_id_tables);
+        context.put("targetProject", targetProject);
+        context.put("targetProject_sqlMap", package_name + ".dao.mapper");
+        context.put("generator_jdbc_password", AESUtil.AESDecode(password));
+        context.put("last_insert_id_tables", last_insert_id_tables);
 
         try {
-            VelocityUtil.generator(generatorConfig_vm,generatorConfigXml,context);
+            VelocityUtil.generator(generatorConfig_vm, generatorConfigXml, context);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+        System.out.println("=========结束生成generatorConfig.xml文件===========");
+        System.out.println("=========开始运行MybatisGenerator文件===========");
+        List<String> warnings = new ArrayList<>();
+        System.out.println("generatorConfigXml :" + generatorConfigXml);
+        File configFile = new File(generatorConfigXml);
+        ConfigurationParser configurationParser = new ConfigurationParser(warnings);
+        Configuration c = null;
+        try {
+            c = configurationParser.parseConfiguration(configFile);
+
+            DefaultShellCallback callback = new DefaultShellCallback(true);
+            MyBatisGenerator mybatisgenerator = new MyBatisGenerator(c, callback, warnings);
+            mybatisgenerator.generate(null);
+        } catch (InvalidConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XMLParserException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("=========结束运行MybatisGenerator文件===========");
+
 
 //    public static void main(String[] args) {
 //        generator();
 //    }
+    }
 }

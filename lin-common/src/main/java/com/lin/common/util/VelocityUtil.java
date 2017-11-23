@@ -1,4 +1,4 @@
-package util;
+package com.lin.common.util;
 
 import org.apache.commons.io.output.FileWriterWithEncoding;
 import org.apache.velocity.Template;

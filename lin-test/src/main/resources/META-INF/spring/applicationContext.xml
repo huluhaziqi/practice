@@ -14,5 +14,5 @@
     <context:component-scan base-package="services"/>
     <context:component-scan base-package="base"/>
     <task:annotation-driven/>
-    <bean id="springContextUtil" class="util.SpringContextUtil"/>
+    <bean id="springContextUtil" class="SpringContextUtil"/>
 </beans>

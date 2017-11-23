@@ -14,7 +14,7 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="propertyConfigurer" class="plugin.EncryptPropertyPlaceholderConfigurer">
+    <bean id="propertyConfigurer" class="com.lin.common.plugin.EncryptPropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
                 <value>classpath:jdbc.properties</value>

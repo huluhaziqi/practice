@@ -1,5 +1,5 @@
-import util.MyBatisGeneratorUtil;
-import util.PropertiesFileUtil;
+import com.lin.common.util.MyBatisGeneratorUtil;
+import com.lin.common.util.PropertiesFileUtil;
 
 import java.util.HashMap;
 import java.util.Map;

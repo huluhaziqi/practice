@@ -4,6 +4,8 @@
 
 <generatorConfiguration>
     <properties resource="generator.properties"></properties>
+    <classPathEntry
+            location="/Users/linxiaobin/.m2/repository/mysql/mysql-connector-java/5.1.40/mysql-connector-java-5.1.40.jar"/>
     <context id="MysqlContext" targetRuntime="Mybatis3" defaultModelType="flat">
         <property name="javaFileEncoding" value="UTF-8"/>
         <!--beginningDelimiter默认值endingDelmiter默认值修改-->
@@ -12,8 +14,8 @@
         <!--toString-->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
         <!--序列化-->
-        <plugin type="com.lin.plugin.SerializablePlugin">
-            <property name="supressJavaInterface" value="false"/>
+        <plugin type="plugin.SerializablePlugin">
+            <property name="suppressJavaInterface" value="false"/>
         </plugin>
         <!--缓存-->
         <plugin type="org.mybatis.generator.plugins.CachePlugin">
@@ -22,13 +24,13 @@
         <!--生成equals和hashCode-->
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
         <!--z注释的使用-->
-        <commentGenerator type="com.lin.plugin.CommentGenerator">
-            <property name="supressAllComments" value="true"/>
-            <property name="supressDate" value="true"/>
+        <commentGenerator type="plugin.CommentGenerator">
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
         </commentGenerator>
         <!--数据连接池-->
         <jdbcConnection driverClass="${generator.jdbc.driver}" connectionURL="${generator.jdbc.url}"
-                        password="${generator.jdbc.password}" userId="${generator.jdbc.username}"/>
+                        password="root" userId="${generator.jdbc.username}"/>
         <!--model-->
         <javaModelGenerator targetPackage="com.lin.upms.model"
                             targetProject="/Users/linxiaobin/IdeaProjects/practice/lin-test/src/main/java"></javaModelGenerator>

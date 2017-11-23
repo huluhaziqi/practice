@@ -1,4 +1,4 @@
-package util;
+package com.lin.common.util;
 
 import java.util.Date;
 import java.util.HashMap;

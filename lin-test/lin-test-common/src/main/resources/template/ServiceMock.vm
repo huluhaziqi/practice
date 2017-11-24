@@ -1,0 +1,19 @@
+package ${package_name}.rpc.api;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ${package_name}.model.${model};
+import ${package_name}.model.${model}Example;
+import ${package_name}.model.${model}Mapper;
+
+impotr java.util.List;
+/**
+* ${model}Service
+* Create by linxiaobin on ${ctime}.
+*/
+
+public interface ${model}ServiceMock extends BaseServiceMock<${model}Mapper,${model},${model}Example>
+implements ${model}Service{
+    private static Logger logger = LoggerFactory.getLogger(${model}ServiceMock.class);
+
+}

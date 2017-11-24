@@ -8,7 +8,7 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <name>lin-dao</name>
+    <name>lin-com.lin.dao</name>
     <url>www.linxiaobin.cn</url>
 
     <properties>
@@ -19,7 +19,7 @@
     </properties>
 
     <modules>
-        <module>lin-admin-dao</module>
+        <module>lin-admin-com.lin.dao</module>
     </modules>
 
 

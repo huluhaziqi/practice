@@ -1,0 +1,14 @@
+package ${package_name}.rpc.api;
+
+import com.lin.test.base.BaseService;
+import ${package_name}.model.${model};
+import ${package_name}.model.${model}Example;
+
+/**
+* ${model}Service
+* Create by linxiaobin on ${ctime}.
+*/
+
+public interface ${model}Service extends BaseService<${model},${model}Example>{
+
+}

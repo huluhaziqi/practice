@@ -17,5 +17,10 @@
             <artifactId>lin-test-common</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.lin</groupId>
+            <artifactId>lin-test-rpc-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 </project>

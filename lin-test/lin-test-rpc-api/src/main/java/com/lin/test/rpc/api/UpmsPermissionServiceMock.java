@@ -1,0 +1,20 @@
+package com.lin.test.rpc.api;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.lin.test.model.UpmsPermission;
+import com.lin.test.model.UpmsPermissionExample;
+import com.lin.test.mapper.UpmsPermissionMapper;
+import com.lin.test.base.BaseServiceMock;
+
+import java.util.List;
+/**
+* UpmsPermissionService
+* Create by linxiaobin on 2017-11-24.
+*/
+
+public class UpmsPermissionServiceMock extends BaseServiceMock<UpmsPermissionMapper,UpmsPermission,UpmsPermissionExample>
+implements UpmsPermissionService{
+    private static Logger logger = LoggerFactory.getLogger(UpmsPermissionServiceMock.class);
+
+}

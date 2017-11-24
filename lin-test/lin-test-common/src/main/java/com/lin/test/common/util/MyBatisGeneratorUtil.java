@@ -40,9 +40,10 @@ public class MyBatisGeneratorUtil {
         generatorConfig_vm = MyBatisGeneratorUtil.class.getResource(generatorConfig_vm).getPath();
         service_vm = MyBatisGeneratorUtil.class.getResource(service_vm).getPath();
         serviceMock_vm = MyBatisGeneratorUtil.class.getResource(serviceMock_vm).getPath();
-//        serviceImpl_vm = MyBatisGeneratorUtil.class.getResource(serviceImpl_vm).getPath();
+        serviceImpl_vm = MyBatisGeneratorUtil.class.getResource(serviceImpl_vm).getPath();
         System.out.println("generatorConfig_vm : " + generatorConfig_vm);
-        String targetProject = "lin-test";
+        String targetProject = module + "/" + module + "-common";
+        System.out.println(MyBatisGeneratorUtil.class.getResource("/").getPath());
         String basePath = MyBatisGeneratorUtil.class.getResource("/").getPath().
                 replace("/target/classes/", "").replace(targetProject, "");
         targetProject = basePath + targetProject;
@@ -113,37 +114,37 @@ public class MyBatisGeneratorUtil {
         String servicePath = basePath + module + "/" + module + "-rpc-api" +
                 "/src/main/java/" + package_name.replaceAll("\\.","/") + "/rpc/api";
         System.out.println("servicePath : " + servicePath);
-        String serviceServicePath = basePath + module + "/" + module + "-rpc-service" +
+        String serviceimplPath = basePath + module + "/" + module + "-rpc-service" +
                 "/src/main/java/" + package_name.replaceAll("\\.","/") + "/rpc/service/impl";
         for(int i = 0; i < tables.size(); i++){
             String model = StringUtil.lineToHump((String)tables.get(i).get("table_name"));
+            String mapper = StringUtil.toLowerCaseFirstOne(model);
             String service = servicePath + "/" + model + "Service.java";
             System.out.println("service :" + service);
             String serviceMock = servicePath + "/" + model + "ServiceMock.java";
-            String serviceImpl = servicePath + "/" + model + "ServiceImpl.java";
+            String serviceImpl = serviceimplPath + "/" + model + "ServiceImpl.java";
             File serviceFile = new File(service);
-            if(!serviceFile.exists()){
                 VelocityContext context1 = new VelocityContext();
                 context1.put("package_name",package_name);
                 context1.put("model",model);
                 context1.put("ctime",time);
                 VelocityUtil.generator(service_vm,service,context1);
-            }
             File serviceMockFile = new File(serviceMock);
-            if(!serviceMockFile.exists()){
-                VelocityContext context1 = new VelocityContext();
-                context1.put("package_name",package_name);
-                context1.put("model",model);
-                context1.put("ctime",time);
-                VelocityUtil.generator(serviceMock_vm,serviceMock,context1);
-            }
-//            File serviceImplFile = new File(serviceImpl);
+//            if(!serviceMockFile.exists()){
+                VelocityContext context2 = new VelocityContext();
+                context2.put("package_name",package_name);
+                context2.put("model",model);
+                context2.put("ctime",time);
+                VelocityUtil.generator(serviceMock_vm,serviceMock,context2);
+//            }
+            File serviceImplFile = new File(serviceImpl);
 //            if(!serviceImplFile.exists()){
-//                VelocityContext context1 = new VelocityContext();
-//                context1.put("package_name",package_name);
-//                context1.put("model",model);
-//                context1.put("ctime",time);
-//                VelocityUtil.generator(serviceImpl_vm,serviceImpl,context1);
+                VelocityContext context3 = new VelocityContext();
+                context3.put("package_name",package_name);
+                context3.put("model",model);
+                context3.put("ctime",time);
+                context3.put("mapper",mapper);
+                VelocityUtil.generator(serviceImpl_vm,serviceImpl,context3);
 //            }
             System.out.println("===============结束生成service====================");
         }

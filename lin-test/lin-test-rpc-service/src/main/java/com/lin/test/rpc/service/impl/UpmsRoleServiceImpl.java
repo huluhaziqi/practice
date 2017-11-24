@@ -11,6 +11,8 @@ import com.lin.test.annotation.BaseService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.cache.annotation.Cacheable;
+import com.lin.test.base.BaseServiceImpl;
+
 
 import java.util.List;
 /**

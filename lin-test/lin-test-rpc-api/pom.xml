@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>com.lin</groupId>
-            <artifactId>lin-test-common</artifactId>
+            <artifactId>lin-test-dao</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>

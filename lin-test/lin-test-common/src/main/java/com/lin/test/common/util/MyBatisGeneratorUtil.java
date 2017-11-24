@@ -42,11 +42,13 @@ public class MyBatisGeneratorUtil {
         serviceMock_vm = MyBatisGeneratorUtil.class.getResource(serviceMock_vm).getPath();
         serviceImpl_vm = MyBatisGeneratorUtil.class.getResource(serviceImpl_vm).getPath();
         System.out.println("generatorConfig_vm : " + generatorConfig_vm);
-        String targetProject = module + "/" + module + "-common";
-        System.out.println(MyBatisGeneratorUtil.class.getResource("/").getPath());
+        String targetProject = module + "/" + module + "-dao";
+        System.out.println("targetProject : " + targetProject);
         String basePath = MyBatisGeneratorUtil.class.getResource("/").getPath().
                 replace("/target/classes/", "").replace(targetProject, "");
+        System.out.println("basePath :" + basePath);
         targetProject = basePath + targetProject;
+        System.out.println("targetProject : " + targetProject);
         String generatorConfigXml = targetProject + "/src/main/resources/generatorConfig.xml";
 
         System.out.println("=========开始生成generatorConfig.xml文件===========");
@@ -68,11 +70,11 @@ public class MyBatisGeneratorUtil {
         jdbcUtil.release();
 
         context.put("tables", tables);
-        context.put("generator_javaModelGenerator_targetPackage", package_name + ".model");
-        context.put("generator_sqlMapGenerator_targetPackage", package_name + ".mapper");
-        context.put("generator_javaClientGenerator_targetPackage", package_name + ".mapper");
+        context.put("generator_javaModelGenerator_targetPackage", package_name + ".dao.model");
+        context.put("generator_sqlMapGenerator_targetPackage", package_name + ".dao.mapper");
+        context.put("generator_javaClientGenerator_targetPackage", package_name + ".dao.mapper");
         context.put("targetProject", targetProject);
-        context.put("targetProject_sqlMap", package_name + ".com.lin.mapper");
+        context.put("targetProject_sqlMap", package_name + ".dao.mapper");
         context.put("generator_jdbc_password", AESUtil.AESDecode(password));
         context.put("last_insert_id_tables", last_insert_id_tables);
 

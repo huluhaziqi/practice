@@ -12,15 +12,18 @@
         <module>lin-test-rpc-api</module>
         <module>lin-test-rpc-service</module>
         <module>lin-test-common</module>
+        <module>lin-test-dao</module>
+        <module>lin-test-client</module>
     </modules>
 
     <name>lin-test</name>
     <url>www.linxiaobin.cn</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.complier.source>1.8</maven.complier.source>
-        <maven.complier.target>1.8</maven.complier.target>
-        <maven.copllier.complierVersion>1.8</maven.copllier.complierVersion>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
     </properties>
 
 </project>

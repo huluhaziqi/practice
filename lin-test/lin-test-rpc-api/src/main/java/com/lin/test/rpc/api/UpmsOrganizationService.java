@@ -1,8 +1,8 @@
 package com.lin.test.rpc.api;
 
 import com.lin.test.base.BaseService;
-import com.lin.test.model.UpmsOrganization;
-import com.lin.test.model.UpmsOrganizationExample;
+import com.lin.test.dao.model.UpmsOrganization;
+import com.lin.test.dao.model.UpmsOrganizationExample;
 
 /**
 * UpmsOrganizationService

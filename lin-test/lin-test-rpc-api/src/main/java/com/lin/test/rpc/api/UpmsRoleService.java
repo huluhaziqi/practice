@@ -1,8 +1,8 @@
 package com.lin.test.rpc.api;
 
 import com.lin.test.base.BaseService;
-import com.lin.test.model.UpmsRole;
-import com.lin.test.model.UpmsRoleExample;
+import com.lin.test.dao.model.UpmsRole;
+import com.lin.test.dao.model.UpmsRoleExample;
 
 /**
 * UpmsRoleService

@@ -31,13 +31,13 @@
         <jdbcConnection driverClass="${generator.jdbc.driver}" connectionURL="${generator.jdbc.url}"
                         password="root" userId="${generator.jdbc.username}"/>
         <!--com.lin.model-->
-        <javaModelGenerator targetPackage="com.lin.test.model"
+        <javaModelGenerator targetPackage="com.lin.test.dao.model"
                             targetProject="/Users/linxiaobin/IdeaProjects/practice/lin-test/lin-test-common/src/main/java"></javaModelGenerator>
         <!--xml-->
-        <sqlMapGenerator targetPackage="com.lin.test.mapper"
+        <sqlMapGenerator targetPackage="com.lin.test.dao.mapper"
                          targetProject="/Users/linxiaobin/IdeaProjects/practice/lin-test/lin-test-common/src/main/java"></sqlMapGenerator>
         <!--mapper接口-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lin.test.mapper"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lin.test.dao.mapper"
                              targetProject="/Users/linxiaobin/IdeaProjects/practice/lin-test/lin-test-common/src/main/java"></javaClientGenerator>
                                 <table tableName="upms_log" domainObjectName="UpmsLog"/>
                                             <table tableName="upms_organization" domainObjectName="UpmsOrganization"/>

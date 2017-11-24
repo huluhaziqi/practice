@@ -2,9 +2,9 @@ package com.lin.test.rpc.api;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.lin.test.model.UpmsRolePermission;
-import com.lin.test.model.UpmsRolePermissionExample;
-import com.lin.test.mapper.UpmsRolePermissionMapper;
+import com.lin.test.dao.model.UpmsRolePermission;
+import com.lin.test.dao.model.UpmsRolePermissionExample;
+import com.lin.test.dao.mapper.UpmsRolePermissionMapper;
 import com.lin.test.base.BaseServiceMock;
 
 import java.util.List;

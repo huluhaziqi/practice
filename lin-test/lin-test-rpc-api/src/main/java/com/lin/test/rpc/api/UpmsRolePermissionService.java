@@ -1,8 +1,8 @@
 package com.lin.test.rpc.api;
 
 import com.lin.test.base.BaseService;
-import com.lin.test.model.UpmsRolePermission;
-import com.lin.test.model.UpmsRolePermissionExample;
+import com.lin.test.dao.model.UpmsRolePermission;
+import com.lin.test.dao.model.UpmsRolePermissionExample;
 
 /**
 * UpmsRolePermissionService

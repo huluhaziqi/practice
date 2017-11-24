@@ -1,8 +1,8 @@
 package com.lin.test.rpc.api;
 
 import com.lin.test.base.BaseService;
-import com.lin.test.model.UpmsLog;
-import com.lin.test.model.UpmsLogExample;
+import com.lin.test.dao.model.UpmsLog;
+import com.lin.test.dao.model.UpmsLogExample;
 
 /**
 * UpmsLogService

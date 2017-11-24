@@ -2,9 +2,9 @@ package com.lin.test.rpc.api;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.lin.test.model.UpmsSystem;
-import com.lin.test.model.UpmsSystemExample;
-import com.lin.test.mapper.UpmsSystemMapper;
+import com.lin.test.dao.model.UpmsSystem;
+import com.lin.test.dao.model.UpmsSystemExample;
+import com.lin.test.dao.mapper.UpmsSystemMapper;
 import com.lin.test.base.BaseServiceMock;
 
 import java.util.List;

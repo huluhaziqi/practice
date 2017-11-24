@@ -2,9 +2,9 @@ package com.lin.test.rpc.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.lin.test.model.UpmsUserRole;
-import com.lin.test.model.UpmsUserRoleExample;
-import com.lin.test.mapper.UpmsUserRoleMapper;
+import com.lin.test.dao.model.UpmsUserRole;
+import com.lin.test.dao.model.UpmsUserRoleExample;
+import com.lin.test.dao.mapper.UpmsUserRoleMapper;
 import com.lin.test.rpc.api.UpmsUserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.lin.test.annotation.BaseService;

@@ -11,8 +11,8 @@
           http://www.springframework.org/schema/task
           http://www.springframework.org/schema/task/spring-task.xsd">
 
-    <context:component-scan base-package="com.lin.services"/>
+    <context:component-scan base-package="com.lin.test"/>
     <context:component-scan base-package="com.lin.test.base"/>
     <task:annotation-driven/>
-    <bean id="springContextUtil" class="SpringContextUtil"/>
+    <bean id="springContextUtil" class="com.lin.test.common.util.SpringContextUtil"/>
 </beans>

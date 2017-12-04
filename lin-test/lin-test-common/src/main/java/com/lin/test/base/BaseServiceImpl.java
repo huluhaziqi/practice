@@ -1,7 +1,11 @@
 package com.lin.test.base;
 
 import com.lin.test.common.util.SpringContextUtil;
+import com.lin.test.db.DynamicDataSource;
+import com.lin.test.enums.DataSourceEnum;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
@@ -10,6 +14,19 @@ public abstract class BaseServiceImpl<Mapper,Record,Example> implements BaseServ
     private Mapper mapper;
     @Override
     public int countByExample(Example example) {
+        try {
+            DynamicDataSource.setDataSource(DataSourceEnum.SLAVE.getName());
+            Method countByExample = mapper.getClass().getDeclaredMethod("countByExample", example.getClass());
+            Object result = countByExample.invoke(mapper, example);
+            return Integer.parseInt(String.valueOf(result));
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        DynamicDataSource.clearDataSource();
         return 0;
     }
 

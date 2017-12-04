@@ -10,6 +10,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>lin-test-rpc-api</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>com.lin</groupId>
@@ -28,9 +30,6 @@
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
-                <includes>
-                    <include>generatorConfig.xml</include>
-                </includes>
             </resource>
         </resources>
         <plugins>

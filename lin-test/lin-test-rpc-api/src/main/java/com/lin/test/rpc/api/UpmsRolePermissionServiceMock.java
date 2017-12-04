@@ -10,7 +10,7 @@ import com.lin.test.base.BaseServiceMock;
 import java.util.List;
 /**
 * UpmsRolePermissionService
-* Create by linxiaobin on 2017-11-24.
+* Create by linxiaobin on 2017-12-01.
 */
 
 public class UpmsRolePermissionServiceMock extends BaseServiceMock<UpmsRolePermissionMapper,UpmsRolePermission,UpmsRolePermissionExample>

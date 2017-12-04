@@ -6,12 +6,14 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd">
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+
+        ">
     <bean id="propertyonfiguration" class="com.lin.test.plugin.EncryptPropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
@@ -19,12 +21,15 @@
             </list>
         </property>
     </bean>
-    <bean id="masterDatasource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+
+    <!-- 主库数据源 -->
+    <bean id="masterDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
           destroy-method="close">
+        <!-- 基本属性 url、user、password -->
+        <property name="driverClassName" value="${master.jdbc.driver}"/>
         <property name="url" value="${master.jdbc.url}"/>
-        <property name="password" value="${master.jdbc.password}"/>
-        <property name="driver" value="${master.jdbc.driver}"/>
         <property name="username" value="${master.jdbc.username}"/>
+        <property name="password" value="${master.jdbc.password}"/>
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="1"/>
         <property name="minIdle" value="1"/>
@@ -43,12 +48,14 @@
         <!-- 配置监控统计拦截的filters -->
         <property name="filters" value="stat"/>
     </bean>
-    <bean id="slaveDatasource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
-          destroy-method="close">
+
+    <!-- 从库数据源 -->
+    <bean id="slaveDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!-- 基本属性 url、user、password -->
+        <property name="driverClassName" value="${slave.jdbc.driver}"/>
         <property name="url" value="${slave.jdbc.url}"/>
-        <property name="password" value="${slave.jdbc.password}"/>
-        <property name="driver" value="${slave.jdbc.driver}"/>
         <property name="username" value="${slave.jdbc.username}"/>
+        <property name="password" value="${slave.jdbc.password}"/>
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="1"/>
         <property name="minIdle" value="1"/>
@@ -67,27 +74,41 @@
         <!-- 配置监控统计拦截的filters -->
         <property name="filters" value="stat"/>
     </bean>
-    <bean id="datasource" class="com.lin.test.db.DynamicDataSource">
+    <bean id="dataSource" class="com.lin.test.db.DynamicDataSource">
         <property name="targetDataSources">
             <map key-type="java.lang.String">
-                <entry value-ref="masterDatasource" key="masterDatasource"/>
-                <entry value-ref="slaveDatasource" key="slaveDatasource"/>
+                <entry value-ref="masterDataSource" key="masterDataSource"/>
+                <entry value-ref="slaveDataSource" key="slaveDataSource"/>
             </map>
         </property>
-        <property name="defaultTargetDataSource" value="masterDatasource"/>
+        <property name="defaultTargetDataSource" ref="masterDataSource"/>
     </bean>
+    <!-- 动态数据源 -->
+    <!--<bean id="dataSource" class="com.lin.test.db.DynamicDataSource">-->
+        <!--<property name="targetDataSources">-->
+            <!--<map key-type="java.lang.String">-->
+                <!--&lt;!&ndash; 可配置多个数据源 &ndash;&gt;-->
+                <!--<entry value-ref="masterDataSource" key="masterDataSource"></entry>-->
+                <!--<entry value-ref="slaveDataSource" key="slaveDataSource"></entry>-->
+            <!--</map>-->
+        <!--</property>-->
+        <!--<property name="defaultTargetDataSource" ref="masterDataSource"></property>-->
+    <!--</bean>-->
+    <!-- 为Mybatis创建SqlSessionFactory，同时指定数据源 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="datasource"/>
+        <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <property name="mapperLocations" value="classpath*:com/lin/test/dao/mapper/*Mapper.xml"/>
     </bean>
-
-    <bean id="mapperScannerConfiguration" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    <!-- Mapper接口所在包名，Spring会自动查找其下的Mapper -->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="**.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
+
+    <!-- 事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="datasource"/>
+        <property name="dataSource" ref="dataSource"/>
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

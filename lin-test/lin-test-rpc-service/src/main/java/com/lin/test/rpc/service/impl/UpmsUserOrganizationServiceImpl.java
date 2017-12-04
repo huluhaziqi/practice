@@ -17,7 +17,7 @@ import com.lin.test.base.BaseServiceImpl;
 import java.util.List;
 /**
 * UpmsUserOrganizationServiceImpl
-* Create by linxiaobin on 2017-11-24.
+* Create by linxiaobin on 2017-12-01.
 */
 
 @Service

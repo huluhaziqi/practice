@@ -11,7 +11,7 @@
 
     <groupId>com.lin</groupId>
     <artifactId>lin-test-client</artifactId>
-
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

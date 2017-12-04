@@ -6,30 +6,44 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 public class DynamicDataSource extends AbstractRoutingDataSource {
-    private static final Logger log = LoggerFactory.getLogger(DynamicDataSource.class);
 
-    private static final ThreadLocal<String> t = new ThreadLocal<>();
+    private final static Logger _log = LoggerFactory.getLogger(DynamicDataSource.class);
+
+    private static final ThreadLocal<String> contextHolder = new ThreadLocal<>();
+
     @Override
     protected Object determineCurrentLookupKey() {
-
-        return getDataSource();
+        String dataSource = getDataSource();
+        _log.info("当前操作使用的数据源：{}", dataSource);
+        return dataSource;
     }
 
-    public static void setDatasource(String datasource){
-        t.set(datasource);
+    /**
+     * 设置数据源
+     * @param dataSource
+     */
+    public static void setDataSource(String dataSource) {
+        contextHolder.set(dataSource);
     }
 
-
-    public static String getDataSource(){
-        String datasource = t.get();
-        if(null == datasource){
-            datasource = DataSourceEnum.MASTER.getDefault();
+    /**
+     * 获取数据源
+     * @return
+     */
+    public static String getDataSource() {
+        String dataSource = contextHolder.get();
+        // 如果没有指定数据源，使用默认数据源
+        if (null == dataSource) {
+            DynamicDataSource.setDataSource(DataSourceEnum.MASTER.getDefault());
         }
-        return datasource;
+        return contextHolder.get();
     }
 
-    public static void clearDataSource(){
-        t.remove();
+    /**
+     * 清除数据源
+     */
+    public static void clearDataSource() {
+        contextHolder.remove();
     }
 
 

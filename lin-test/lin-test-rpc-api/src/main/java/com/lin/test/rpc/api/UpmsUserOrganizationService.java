@@ -6,7 +6,7 @@ import com.lin.test.dao.model.UpmsUserOrganizationExample;
 
 /**
 * UpmsUserOrganizationService
-* Create by linxiaobin on 2017-11-24.
+* Create by linxiaobin on 2017-12-01.
 */
 
 public interface UpmsUserOrganizationService extends BaseService<UpmsUserOrganization,UpmsUserOrganizationExample>{

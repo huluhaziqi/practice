@@ -2,8 +2,8 @@ package com.lin.test.enums;
 
 public enum  DataSourceEnum {
 
-    MASTER("lin",true),
-    SLAVE("lin2",false);
+    MASTER("masterDataSource",true),
+    SLAVE("slaveDataSource",false);
 
     DataSourceEnum(String name, boolean isMaster) {
         this.name = name;

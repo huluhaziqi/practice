@@ -8,13 +8,6 @@
     <artifactId>lin-test</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <modules>
-        <module>lin-test-rpc-api</module>
-        <module>lin-test-rpc-service</module>
-        <module>lin-test-common</module>
-        <module>lin-test-dao</module>
-        <module>lin-test-client</module>
-    </modules>
 
     <name>lin-test</name>
     <url>www.linxiaobin.cn</url>
@@ -25,6 +18,13 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
     </properties>
+    <modules>
+        <module>lin-test-rpc-api</module>
+        <module>lin-test-rpc-service</module>
+        <module>lin-test-common</module>
+        <module>lin-test-dao</module>
+        <module>lin-test-client</module>
+    </modules>
 
 </project>
 

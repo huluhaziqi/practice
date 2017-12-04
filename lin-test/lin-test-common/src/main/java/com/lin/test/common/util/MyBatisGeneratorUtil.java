@@ -27,6 +27,7 @@ public class MyBatisGeneratorUtil {
     private static String serviceMock_vm = "/template/ServiceMock.vm";
 
     private static String serviceImpl_vm = "/template/ServiceImpl.vm";
+
     public static void generator(
             String module,
             String driver,
@@ -80,6 +81,9 @@ public class MyBatisGeneratorUtil {
 
         try {
             VelocityUtil.generator(generatorConfig_vm, generatorConfigXml, context);
+
+            deleteDir(new File(package_name + ".dao.model"));
+            deleteDir(new File(package_name + ".dao.mapper"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -114,41 +118,51 @@ public class MyBatisGeneratorUtil {
         System.out.println("basePath :" + basePath);
         System.out.println("module :" + module);
         String servicePath = basePath + module + "/" + module + "-rpc-api" +
-                "/src/main/java/" + package_name.replaceAll("\\.","/") + "/rpc/api";
+                "/src/main/java/" + package_name.replaceAll("\\.", "/") + "/rpc/api";
         System.out.println("servicePath : " + servicePath);
         String serviceimplPath = basePath + module + "/" + module + "-rpc-service" +
-                "/src/main/java/" + package_name.replaceAll("\\.","/") + "/rpc/service/impl";
-        for(int i = 0; i < tables.size(); i++){
-            String model = StringUtil.lineToHump((String)tables.get(i).get("table_name"));
+                "/src/main/java/" + package_name.replaceAll("\\.", "/") + "/rpc/service/impl";
+        for (int i = 0; i < tables.size(); i++) {
+            String model = StringUtil.lineToHump((String) tables.get(i).get("table_name"));
             String mapper = StringUtil.toLowerCaseFirstOne(model);
             String service = servicePath + "/" + model + "Service.java";
             System.out.println("service :" + service);
             String serviceMock = servicePath + "/" + model + "ServiceMock.java";
             String serviceImpl = serviceimplPath + "/" + model + "ServiceImpl.java";
             File serviceFile = new File(service);
-                VelocityContext context1 = new VelocityContext();
-                context1.put("package_name",package_name);
-                context1.put("model",model);
-                context1.put("ctime",time);
-                VelocityUtil.generator(service_vm,service,context1);
+            VelocityContext context1 = new VelocityContext();
+            context1.put("package_name", package_name);
+            context1.put("model", model);
+            context1.put("ctime", time);
+            VelocityUtil.generator(service_vm, service, context1);
             File serviceMockFile = new File(serviceMock);
 //            if(!serviceMockFile.exists()){
-                VelocityContext context2 = new VelocityContext();
-                context2.put("package_name",package_name);
-                context2.put("model",model);
-                context2.put("ctime",time);
-                VelocityUtil.generator(serviceMock_vm,serviceMock,context2);
+            VelocityContext context2 = new VelocityContext();
+            context2.put("package_name", package_name);
+            context2.put("model", model);
+            context2.put("ctime", time);
+            VelocityUtil.generator(serviceMock_vm, serviceMock, context2);
 //            }
             File serviceImplFile = new File(serviceImpl);
 //            if(!serviceImplFile.exists()){
-                VelocityContext context3 = new VelocityContext();
-                context3.put("package_name",package_name);
-                context3.put("model",model);
-                context3.put("ctime",time);
-                context3.put("mapper",mapper);
-                VelocityUtil.generator(serviceImpl_vm,serviceImpl,context3);
+            VelocityContext context3 = new VelocityContext();
+            context3.put("package_name", package_name);
+            context3.put("model", model);
+            context3.put("ctime", time);
+            context3.put("mapper", mapper);
+            VelocityUtil.generator(serviceImpl_vm, serviceImpl, context3);
 //            }
             System.out.println("===============结束生成service====================");
         }
+    }
+
+    public static void deleteDir(File dir) {
+        if (dir.isDirectory()) {
+            File[] files = dir.listFiles();
+            for (File file : files) {
+                deleteDir(file);
+            }
+        }
+        dir.delete();
     }
 }

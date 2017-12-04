@@ -6,7 +6,7 @@ import com.lin.test.dao.model.UpmsUserRoleExample;
 
 /**
 * UpmsUserRoleService
-* Create by linxiaobin on 2017-11-24.
+* Create by linxiaobin on 2017-12-01.
 */
 
 public interface UpmsUserRoleService extends BaseService<UpmsUserRole,UpmsUserRoleExample>{

@@ -42,6 +42,6 @@
     <bean id="upmsLogService" class="com.lin.test.rpc.service.impl.UpmsLogServiceImpl"/>
     <dubbo:service interface="com.lin.test.rpc.api.UpmsLogService" ref="upmsLogService" timeout="10000"/>
 
-    <!--<bean id="upmsApiService" class="com.lin.test.rpc.service.impl.UpmsApiServiceImpl"/>-->
-    <!--<dubbo:service interface="com.lin.test.rpc.api.UpmsApiService" ref="upmsApiService" timeout="10000"/>-->
+    <bean id="upmsApiService" class="com.lin.test.rpc.service.impl.UpmsApiServiceImpl"/>
+    <dubbo:service interface="com.lin.test.rpc.api.UpmsApiService" ref="upmsApiService" timeout="10000"/>
 </beans>

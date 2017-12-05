@@ -11,4 +11,6 @@
 
     <!--日志记录aop实现-->
     <bean class="com.lin.test.aspect.RpcLogAspect"/>
+    <bean class="com.lin.test.client.interceptor.LogAspect"/>
+
 </beans>

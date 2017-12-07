@@ -38,10 +38,7 @@ public class NoConfigurationCreateTest extends BaseTest {
         jdbcRealm.setPermissionsLookupEnabled(true);
 
         manager.setRealm(jdbcRealm);
-
         SecurityUtils.setSecurityManager(manager);
-
-
         Subject subject = SecurityUtils.getSubject();
 
         UsernamePasswordToken token = new UsernamePasswordToken("zhang","123");

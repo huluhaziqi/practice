@@ -19,7 +19,6 @@ public class ConfigurationCreateTest {
         SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
         subject.login(token);
-
         System.out.println(subject.isAuthenticated());
     }
 }

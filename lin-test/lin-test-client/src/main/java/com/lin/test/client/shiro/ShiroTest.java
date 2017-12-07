@@ -1,4 +1,4 @@
-package com.lin.test.client;
+package com.lin.test.client.shiro;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;

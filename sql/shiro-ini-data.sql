@@ -1,0 +1,1 @@
+INSERT INTO users(username,password,password_salt) VALUES ('liu','f50842a02fdb259281f83e7412f060a7','c840b5e87fc13cf2fcf77bba752b5843');

@@ -8,7 +8,7 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <name>lin-com.lin.dao</name>
+    <name>lin-admin</name>
     <url>www.linxiaobin.cn</url>
 
     <properties>
@@ -17,10 +17,6 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
     </properties>
-
-    <modules>
-        <module>lin-admin-com.lin.dao</module>
-    </modules>
 
 
 </project>

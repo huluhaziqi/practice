@@ -10,10 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.lin</groupId>
-    <artifactId>lin-upms-com.lin.dao</artifactId>
-    <packaging>war</packaging>
-
-    
-
-
+    <artifactId>lin-upms-dao</artifactId>
+    <packaging>jar</packaging>
 </project>

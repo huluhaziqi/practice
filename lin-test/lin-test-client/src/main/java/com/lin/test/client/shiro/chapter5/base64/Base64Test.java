@@ -37,10 +37,14 @@ public class Base64Test {
 
     @Test
     public void testMD5() {
-        String str = "hello";
-        String salt = "123";
+        String str = "liu";
+        String salt = "f50842a02fdb259281f83e7412f060a7";
         String md5 = new Md5Hash(str, salt).toString();
         System.out.println(md5);
+
+        String password = "123";
+        String md52 = new Md5Hash(password,salt).toString();
+        System.out.println(md52);
         //7dfe54ea69b2d07a597952e49374a1aebf3c10689444a83f0a084761c8a1c626
     }
 

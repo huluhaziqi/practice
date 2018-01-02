@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ehcache name="es">
     <diskStore path="java.io.tmpdir"/>
-
     <!--登记记录缓存-->
     <cache name="passwordCache"
            maxEntriesLocalHeap="2000"

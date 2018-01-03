@@ -1,15 +1,12 @@
 package com.lin.test.client.shiro.chapter6.realm.service;
 
 import com.lin.test.client.shiro.chapter6.realm.dao.RoleDao;
+import com.lin.test.client.shiro.chapter6.realm.dao.RoleDaoImpl;
 import com.lin.test.client.shiro.chapter6.realm.entity.Role;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
 public class RoleServiceImpl implements RoleService {
 
-    @Autowired
-    private RoleDao roleDao;
+    private RoleDao roleDao = new RoleDaoImpl();
 
     @Override
     public Role createRole(Role role) {

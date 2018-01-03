@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- ApplicationContext -->
+    <bean id="springContextUtil" class="com.lin.test.common.util.SpringContextUtil"></bean>
+    <bean id="userService" class="com.lin.test.client.shiro.chapter6.realm.service.UserServiceImpl"/>
+    <bean id="permissionService" class="com.lin.test.client.shiro.chapter6.realm.service.PermissionServiceImpl"/>
+    <bean id="roleService" class="com.lin.test.client.shiro.chapter6.realm.service.RoleServiceImpl"/>
+    <bean id="passwordHelper" class="com.lin.test.client.shiro.chapter6.realm.util.PasswordHelper"/>
+    <bean id="userDao" class="com.lin.test.client.shiro.chapter6.realm.dao.UserDaoImpl"/>
+    <bean id="permissionDao" class="com.lin.test.client.shiro.chapter6.realm.dao.PermissionDaoImpl"/>
+    <bean id="roleDao" class="com.lin.test.client.shiro.chapter6.realm.dao.RoleDaoImpl"/>
+    <bean class="com.lin.test.client.shiro.chapter6.realm.util.JdbcTemplateUtils"/>
+    <bean id="credentialsMatcher" class="com.lin.test.client.shiro.chapter6.realm.credentials.RetryLimitHashedCredentialsMatcher"/>
+    <bean id="userRealm" class="com.lin.test.client.shiro.chapter6.realm.realm.UserRealm">
+        <property name="userService" ref="userService"/>
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+        <property name="cachingEnabled" value="true"/>
+        <property name="authenticationCachingEnabled" value="true"/>
+        <property name="authenticationCacheName" value="authenticationCache"/>
+        <property name="authorizationCachingEnabled" value="true"/>
+        <property name="authorizationCacheName" value="authorizationCache"/>
+    </bean>
+</beans>

@@ -17,11 +17,13 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
     public RetryLimitHashedCredentialsMatcher() {
         CacheManager cacheManager = CacheManager.newInstance(
                 CacheManager.class.getClassLoader().getResource("ehcache.xml"));
+        ehcache = cacheManager.getEhcache("passwordCache");
     }
 
     @Override
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
         String username = token.getPrincipal().toString();
+        System.out.println("username :" + username);
         Element element = ehcache.get(username);
         if(element == null){
             element = new Element(username,new AtomicInteger(0));

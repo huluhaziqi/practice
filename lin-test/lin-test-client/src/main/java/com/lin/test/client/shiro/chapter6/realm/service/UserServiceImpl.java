@@ -1,20 +1,21 @@
 package com.lin.test.client.shiro.chapter6.realm.service;
 
 import com.lin.test.client.shiro.chapter6.realm.dao.UserDao;
+import com.lin.test.client.shiro.chapter6.realm.dao.UserDaoImpl;
 import com.lin.test.client.shiro.chapter6.realm.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.lin.test.client.shiro.chapter6.realm.util.PasswordHelper;
 
 import java.util.Set;
 
-@Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserDao userDao;
+    private UserDao userDao = new UserDaoImpl();
+
+    private PasswordHelper passwordHelper = new PasswordHelper();
 
     @Override
     public User createUser(User user) {
+        passwordHelper.encryptPassword(user);
         return userDao.createUser(user);
     }
 
@@ -30,12 +31,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void correlationRoles(Long userId, Long... roleIds) {
-        userDao.correlationRoles(userId,roleIds);
+        userDao.correlationRoles(userId, roleIds);
     }
 
     @Override
     public void uncorrelationsRole(Long userId, Long... roleIds) {
-        userDao.uncorrelationsRole(userId,roleIds);
+        userDao.uncorrelationsRole(userId, roleIds);
     }
 
     @Override
@@ -61,8 +62,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void changePassword(Long userId, String newPassword) {
         User user = userDao.findOne(userId);
-        if(user != null){
+        if (user != null) {
             user.setPassword(newPassword);
+            passwordHelper.encryptPassword(user);
+            userDao.updateUser(user);
         }
     }
 }

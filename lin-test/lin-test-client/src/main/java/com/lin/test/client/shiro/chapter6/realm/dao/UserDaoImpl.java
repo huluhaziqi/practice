@@ -1,41 +1,32 @@
 package com.lin.test.client.shiro.chapter6.realm.dao;
 
 import com.lin.test.client.shiro.chapter6.realm.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.lin.test.client.shiro.chapter6.realm.util.JdbcTemplateUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Repository
 public class UserDaoImpl implements UserDao {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate = JdbcTemplateUtils.jdbcTemplate();
 
     @Override
     public User createUser(User user) {
         final String sql = "insert into sys_users(username,password,salt,locked) values (?,?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        jdbcTemplate.update(new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement preparedStatement = connection.prepareStatement(sql, new String[]{"id"});
-                preparedStatement.setString(1, user.getUsername());
-                preparedStatement.setString(2, user.getPassword());
-                preparedStatement.setString(3, user.getSalt());
-                preparedStatement.setBoolean(4, user.getLocked());
-                return preparedStatement;
-            }
+        jdbcTemplate.update((p) -> {
+            PreparedStatement preparedStatement = p.prepareStatement(sql, new String[]{"id"});
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getSalt());
+            preparedStatement.setBoolean(4, user.getLocked());
+            return preparedStatement;
         }, keyHolder);
         user.setId(keyHolder.getKey().longValue());
         return user;

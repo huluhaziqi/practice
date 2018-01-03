@@ -5,7 +5,9 @@ import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PasswordHelper {
 
     private RandomNumberGenerator generator = new SecureRandomNumberGenerator();
@@ -17,7 +19,7 @@ public class PasswordHelper {
     public void encryptPassword(User user) {
         user.setSalt(generator.nextBytes().toHex());
         String password = new SimpleHash(algorithmName, user.getPassword(),
-                ByteSource.Util.bytes(user.getSalt()), hashIterations).toHex();
+                ByteSource.Util.bytes(user.credentialsSalt()), hashIterations).toHex();
         user.setPassword(password);
     }
 }

@@ -1,25 +1,23 @@
 package com.lin.test.client.shiro.chapter6.realm.util;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class JdbcTemplateUtils {
 
-    private static JdbcTemplate template;
+    private  static JdbcTemplate jdbcTemplate;
 
-    @Bean
     public static JdbcTemplate jdbcTemplate() {
-        if (template == null) {
-            template = createJdbcTemplate();
+        if (jdbcTemplate == null) {
+            jdbcTemplate = createJdbcTemplate();
         }
-        return template;
+        return jdbcTemplate;
     }
 
     private static JdbcTemplate createJdbcTemplate() {
         DruidDataSource ds = new DruidDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://localhost:3306/lin");
+        ds.setUrl("jdbc:mysql://localhost:3306/lin2?useUnicode=true&characterEncoding=UTF-8");
         ds.setUsername("root");
         ds.setPassword("root");
         return new JdbcTemplate(ds);

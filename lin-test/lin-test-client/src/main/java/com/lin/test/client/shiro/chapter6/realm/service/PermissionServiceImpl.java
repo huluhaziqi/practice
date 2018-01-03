@@ -1,15 +1,14 @@
 package com.lin.test.client.shiro.chapter6.realm.service;
 
 import com.lin.test.client.shiro.chapter6.realm.dao.PermissionDao;
+import com.lin.test.client.shiro.chapter6.realm.dao.PermissionDaoImpl;
 import com.lin.test.client.shiro.chapter6.realm.entity.Permission;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PermissionServiceImpl implements PermissionService {
 
-    @Autowired
-    private PermissionDao permissionDao;
+    private PermissionDao permissionDao = new PermissionDaoImpl();
 
     @Override
     public Permission createPermission(Permission permission) {
